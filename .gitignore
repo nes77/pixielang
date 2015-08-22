@@ -34,4 +34,5 @@ Makefile
 cmake_install.cmake
 install_manifest.txt
 
-boost/
+*.pyc
+.ycm_extra_conf.py
