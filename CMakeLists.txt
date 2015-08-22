@@ -12,7 +12,11 @@ configure_file (
 
 include_directories(includes)
 
-add_executable(ppxe src/main.cpp src/ppxe/object.cpp includes/ppxe/object.h)
+add_executable(ppxe
+        src/main.cpp
+        src/ppxe/object.cpp src/ppxe/function.cpp
+        includes/ppxe/object.hpp includes/ppxe/function.hpp
+        includes/ppxe/instructions.hpp includes/ppxe/common.hpp)
 
 include (InstallRequiredSystemLibraries)
 
