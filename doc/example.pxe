@@ -1,0 +1,52 @@
+# implicitly
+# import pixie.lang.*
+
+object HelloWorld {
+    main = defun argv -> {
+        inner_fn = defun x, y -> x + y;
+        print("Hello, world!");
+
+        a, b = 0, 1;
+        c, d = a, b;
+        b, a = a, b;
+
+        a = b + c + d;
+        
+        return inner_fn(a, b);
+    }
+}
+
+HelloWorld.main()
+
+The above should create a few objects.
+
+object HelloWorld
+class HelloWorld.main
+class HelloWorld.main.inner_fn
+
+class HelloWorld.main has the following members
+class HelloWorld.main.inner_fn
+instance variable a
+instance variable b
+instance variable c
+instance variable d
+
+represented as
+locals
+    "a"
+    "b"
+    "c"
+    "d"
+
+Should compile to something similar to
+
+#start
+
+CODE
+ 
+OBJECT_DEF
+STORE_NAME HelloWorld
+
+CLASS_DEF
+ADD_PARENT pixie.lang.function
+

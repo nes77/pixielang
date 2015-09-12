@@ -1,7 +1,7 @@
 /**
  *
  * instructions.hpp
- * Defines the instructions set for ppxe
+ * Defines the instructions set for pixie
  *
  */
 
@@ -9,7 +9,7 @@
 
 // Class definition instructions
 
-#define CLASS_DECL 0xFFFFFFFF     // Set ppxe to class definition mode
+#define CLASS_DECL 0xFFFFFFFF     // Set pixie to class definition mode
 #define CLASS_END  0x00000000      // End definition of a class
 
 #define CLASS_SET_NAME 0x00000001 // Pop string from stack; this becomes the class name
