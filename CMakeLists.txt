@@ -5,6 +5,10 @@ project (pixie)
 set (PIXIE_VERSION_MAJOR 0)
 set (PIXIE_VERSION_MINOR 1)
 
+set (COMP_FLAGS "-Werror -Wall -std=c++11")
+
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMP_FLAGS}")
+
 configure_file (
     includes/pixie_config.h.in
     includes/pixie/pixie_config.h

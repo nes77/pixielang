@@ -1,9 +1,12 @@
 #include "../pixie/common.hpp"
+#include "../pixie/class.hpp"
 
 namespace pixie {
-    class Function {
-
-    public:
-
+    
+    struct Function {
+        
+        
+        
     };
+    
 }

@@ -1,0 +1,51 @@
+object HelloWorld {
+
+    main = defun (argv="") -> {
+        print(argv)
+    }
+
+}
+
+HelloWorld.main("Hello, World!")
+
+# variables defined here become part of implicit module namespace
+
+CONST
+"HelloWorld"
+"main"
+"argv"
+""
+"Hello, World!"
+END_CONST
+
+CODE # 0 - code for HelloWorld.main
+LOAD_FAST 0
+MAKE_TUPLE 1
+PUSH_S "args"
+PUSH_S "pixie.lang.print"
+CALL 3
+LOAD_NONE
+RET
+END_CODE
+
+LOAD_CONST 0
+DEFINE_OBJECT # an object named HelloWorld now exists in the namespace for this module
+STORE_FAST 0
+LOAD_CODE 0
+PUSH_S "code"
+LOAD_CONST 3
+LOAD_CONST 2
+MAKE_TUPLE 2
+PUSH_S "opt_args"
+MAKE_FUNCTION 5
+LOAD_CONST 1
+LOAD_FAST 0
+SET_ATTRIBUTE # Takes three objects
+# stack should be empty right now
+LOAD_CONST 4
+MAKE_TUPLE 1
+PUSH_S "args"
+PUSH_S "HelloWorld.main"
+CALL 3
+
+

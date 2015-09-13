@@ -1,9 +1,15 @@
+#pragma once
+
 #include "../pixie/common.hpp"
+#include "../pixie/class.hpp"
 
 namespace pixie {
 
-    class Object {
+    struct Object {
         
+        std::shared_ptr<pixie::Class> type;
+        
+        virtual ~Object();
     };
 
 }
