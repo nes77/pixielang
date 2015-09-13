@@ -3,7 +3,7 @@
 namespace pixie {
 
     class Object {
-
+        
     };
 
 }
