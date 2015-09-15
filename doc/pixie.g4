@@ -43,72 +43,25 @@ rhs_expr
 
 expr
     :   '(' expr ')'
-    |   func_def
     |   literal_expr
-    |   call_expr
-    |   binary_expr
-    |   unary_expr
-    |   dotted_name
-    ;
-
-binary_expr
-    :   xor_expr (Or xor_expr)*
-    ;
-
-xor_expr
-    :   and_expr (Xor and_expr)*
-    ;
-
-and_expr
-    :   not_expr (And not_expr)*
-    ;
-
-not_expr
-    :   Not? comp_expr
-    ;
-
-comp_expr
-    :   vbar_expr (ComparisonOperator vbar_expr)*
-    ;
-
-vbar_expr
-    :   caret_expr (VBar caret_expr)*
-    ;
-
-caret_expr
-    :   amper_expr (Caret amper_expr)*
-    ;
-
-amper_expr
-    :   shf_expr (Amper shf_expr)*
-    ;
-
-shf_expr
-    :   plus_expr ((LeftShift | RightShift) plus_expr)*
-    ;
-
-plus_expr
-    :   star_expr ((Plus | Minus) star_expr)*
-    ;
-
-star_expr
-    :   unary_expr ((Star | Slash | Percent) unary_expr)*
-    ;
-
-unary_expr
-    :   (Plus | Minus | Tilde)? dbl_star_expr
-    ;
-
-dbl_star_expr
-    :   atom_expr (DoubleStar atom_expr)*
-    ;
-
-atom_expr
-    :   call_expr
-    |   dotted_name
-    |   subscription_expr
-    |   slice_expr
-    |   highest_expr
+    |   (subscription_expr
+        |slice_expr
+        |call_expr
+        |dotted_name
+        )
+    |   expr DoubleStar expr
+    |   (Plus | Minus | Tilde) expr
+    |   (Star | Slash | Percent) expr
+    |   expr (Plus | Minus) expr
+    |   expr (LeftShift | RightShift) expr
+    |   expr Amper expr
+    |   expr Caret expr
+    |   expr VBar expr
+    |   expr ComparisonOperator expr
+    |   Not expr
+    |   expr And expr
+    |   expr Or expr
+    |   func_def
     ;
 
 subscription_expr
