@@ -1,0 +1,13 @@
+import pixie.lang;
+
+def hello_world(str) -> print(str);
+
+hello_world("Hello, World!");
+
+def kargs(a, b, c, d) -> print(d);
+
+x = 5;
+
+1 + 2 + 3 - 4 * 5;
+
+print(x[4:5]);

@@ -1,6 +1,24 @@
 cmake_minimum_required (VERSION 3.0)
 project (pixie)
 
+# set up Boost
+if (NOT DEFINED BOOST_ROOT AND
+    NOT DEFINED ENV{BOOST_ROOT} AND
+    NOT DEFINED BOOST_INCLUDEDIR AND
+    NOT DEFINED ENV{BOOST_INCLUDEDIR} AND
+    NOT DEFINED BOOST_LIBRARYDIR AND
+    NOT DEFINED ENV{BOOST_LIBRARYDIR})
+    
+    set(BOOST_ROOT "libs/boost")
+
+endif()
+
+if (APPLE OR WIN32)
+    set(Boost_USE_STATIC_LIBS TRUE)
+endif()
+
+find_package(Boost 1.55 REQUIRED COMPONENTS program_options filesystem)
+
 # version number
 set (PIXIE_VERSION_MAJOR 0)
 set (PIXIE_VERSION_MINOR 1)
@@ -10,22 +28,27 @@ set (COMP_FLAGS "-Werror -Wall -std=c++11")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMP_FLAGS}")
 
 configure_file (
-    includes/pixie_config.h.in
-    includes/pixie/pixie_config.h
+    libpixie/pixie_config.in.hpp
+    libpixie/pixie_config.hpp
     )
 
-include_directories(includes)
+include_directories(libpixie ${Boost_INCLUDE_DIRS})
 
-add_executable(pixie
-        src/main.cpp
-        src/pixie/object.cpp src/pixie/function.cpp
-        includes/pixie/object.hpp includes/pixie/function.hpp
-        includes/pixie/instructions.hpp includes/pixie/common.hpp)
+message("PROJECT_SOURCE_DIR points to " ${PROJECT_SOURCE_DIR})
 
-include (InstallRequiredSystemLibraries)
+add_library(pixie-core
+    SHARED
+    libpixie/ast.cpp
+)
 
-set (CPACK_RESOURCE_FILE_LICENSE LICENSE)
-set (CPACK_PACKAGE_VERSION_MAJOR "${PIXIE_VERSION_MAJOR}")
-set (CPACK_PACKAGE_VERSION_MINOR "${PIXIE_VERSION_MINOR}")
+add_executable(pixc 
+    pixc/pixc.cpp
+)
 
-include (CPack)
+add_executable(pixie 
+    pixie/pixie.cpp
+)
+
+target_link_libraries(pixc pixie-core ${Boost-LIBRARIES})
+target_link_libraries(pixie pixie-core ${Boost-LIBRARIES})
+target_link_libraries(pixie-core ${Boost-LIBRARIES})

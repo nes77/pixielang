@@ -1,4 +1,4 @@
-grammar pixie;
+grammar Pixie;
 
 pixieFile
     :   (stmt ';' | class_def | named_func_def)*
@@ -29,7 +29,7 @@ return_stmt
     ;
 
 assign_stmt
-    :   lhs_expr AssignmentOperator rhs_expr
+    :   lhs_expr AssignmentOperator expr
     ;
 
 lhs_expr
@@ -37,31 +37,33 @@ lhs_expr
     |   dotted_name
     ;
 
-rhs_expr
-    :   expr
-    ;
-
 expr
     :   '(' expr ')'
+    |   expr '**' expr
+    |   '+' expr
+    |   '-' expr 
+    |   '~' expr
+    |   expr '*' expr 
+    |   expr '/' expr 
+    |   expr '%' expr
+    |   expr '+' expr
+    |   expr '-' expr
+    |   expr '<<' expr
+    |   expr '>>' expr
+    |   expr '&' expr
+    |   expr '^' expr
+    |   expr '|' expr
+    |   expr ComparisonOperator expr
+    |   'not' expr
+    |   expr 'and' expr
+    |   expr 'or' expr
+    |   func_def
     |   literal_expr
     |   (subscription_expr
         |slice_expr
         |call_expr
         |dotted_name
         )
-    |   expr DoubleStar expr
-    |   (Plus | Minus | Tilde) expr
-    |   (Star | Slash | Percent) expr
-    |   expr (Plus | Minus) expr
-    |   expr (LeftShift | RightShift) expr
-    |   expr Amper expr
-    |   expr Caret expr
-    |   expr VBar expr
-    |   expr ComparisonOperator expr
-    |   Not expr
-    |   expr And expr
-    |   expr Or expr
-    |   func_def
     ;
 
 subscription_expr
@@ -113,32 +115,32 @@ named_func_def
     ;
 
 func_def
-    :   '(' func_def_args ')' '->' ( expr ';' | scope )
+    :   parameter_list '->' ( expr ';' | scope )
+    ;
+
+parameter_list
+    : '(' func_def_args? ')'
     ;
 
 func_def_args
-    :   (var_arg)* (',' named_arg)*
-    |   '*' Name (',' '**' Name)?
-    ;
-
-var_arg
-    :   Name (',' Name)*
-    ;
-
-named_arg
-    :   Name Equals expr (',' named_arg)*
+    :   Name (',' Name)* 
+        (',' 
+         ('*' Name (',' '**' Name)? 
+                    |'**' Name
+         )
+        )?
+    |   '*' Name (',' '**' Name)? 
+    |   '**' Name
     ;
 
 func_args
     :   expr (',' func_args)*
-    |   named_arg
     ;
         
-dotted_name : Name (Dot Name)*;
+dotted_name : Name ('.' Name)*;
 
 Literal
     :   NumberLiteral
-    |   NumberLiteral
     |   StringLiteral
     ;
 
@@ -319,7 +321,7 @@ DoubleStarEquals : '**='; // __apow__
 TildeEquals : '~='; // __aneg__
 
 LineComment
-    : '#' ~[\r\n]* '\n'
+    : '#' ~[\r\n]*? '\n'
     ;
 
 HS : [ \t]+ -> skip;
