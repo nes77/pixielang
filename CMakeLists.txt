@@ -23,7 +23,7 @@ find_package(Boost 1.55 REQUIRED COMPONENTS program_options filesystem)
 set (PIXIE_VERSION_MAJOR 0)
 set (PIXIE_VERSION_MINOR 1)
 
-set (COMP_FLAGS "-Werror -Wall -std=c++11")
+set (COMP_FLAGS "-Werror -Wall -Wno-reorder -std=c++11")
 
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMP_FLAGS}")
 
@@ -39,6 +39,7 @@ include_directories(src/libpixie ${Boost_INCLUDE_DIRS})
 add_library(pixie-core
     SHARED
     src/libpixie/ast.cpp
+    src/libpixie/lexer.cpp
 )
 
 add_executable(pixc 
@@ -49,6 +50,9 @@ add_executable(pixie
     src/pixie/pixie.cpp
 )
 
-target_link_libraries(pixc pixie-core ${Boost-LIBRARIES})
-target_link_libraries(pixie pixie-core ${Boost-LIBRARIES})
-target_link_libraries(pixie-core ${Boost-LIBRARIES})
+#message("Boost libs: " ${Boost_LIBRARIES})
+
+target_link_libraries(pixie-core ${Boost_LIBRARIES})
+target_link_libraries(pixc pixie-core ${Boost_LIBRARIES})
+target_link_libraries(pixie pixie-core ${Boost_LIBRARIES})
+
