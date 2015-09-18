@@ -23,7 +23,7 @@ find_package(Boost 1.55 REQUIRED COMPONENTS program_options filesystem)
 set (PIXIE_VERSION_MAJOR 0)
 set (PIXIE_VERSION_MINOR 1)
 
-set (COMP_FLAGS "-Werror -Wall -Wno-reorder -std=c++11")
+set (COMP_FLAGS "-g -Werror -Wall -Wno-reorder -std=c++11")
 
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMP_FLAGS}")
 

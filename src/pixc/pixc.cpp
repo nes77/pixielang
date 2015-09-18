@@ -59,7 +59,6 @@ int main(int argc, const char **argv) {
     
     if (!vm.count("FILE")) {
         cerr << "Must supply at least one source file." << "\n";
-        return EINVAL;
     }
     
     cout << "Gonna print out AST? " 
@@ -67,7 +66,8 @@ int main(int argc, const char **argv) {
     
     cout << "Source files:\n";
     
-    vector<string> files = vm["FILE"].as<vector<string> >();
+    vector<string> files; /*= vm["FILE"].as<vector<string> >();*/
+    files.push_back(string("/home/nsamson/Projects/pixie/doc/grammar_test1.px"));
     
     BOOST_FOREACH(string file, files) {
         
