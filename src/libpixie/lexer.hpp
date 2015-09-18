@@ -39,7 +39,7 @@ namespace pixie {
                     VBar, Amper, Dot,
                     Import,
                     For, While, Break, Continue,
-                    SemiColon,
+                    SemiColon, Colon,
                     LParens, RParens,
                     LBrace, RBrace,
                     LBracket, RBracket,
@@ -112,6 +112,7 @@ namespace pixie {
                         RShiftAssign(">>="),
                         Arrow("->"),
                         SemiColon(";"),
+                        Colon("[:]"),
                         LParens("[(]"),
                         RParens("[)]"),
                         RBrace("[{]"),
@@ -142,6 +143,7 @@ namespace pixie {
                         |   For
                         |   While
                         |   Break
+                        |   Import              
                         |   Continue
                         |   If
                         |   Then
@@ -183,8 +185,9 @@ namespace pixie {
                         |   AmperAssign
                         |   LShiftAssign
                         |   RShiftAssign
-                        |   Arrow
+                        |   Arrow               
                         |   SemiColon
+                        |   Colon
                         |   LParens
                         |   RParens
                         |   RBrace

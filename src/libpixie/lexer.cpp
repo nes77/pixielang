@@ -28,10 +28,11 @@ void pixie::compile::_test_tokenizer(std::string filename) {
     pixie::compile::pixie_lexer tokens;
     std::string::iterator it = f_contents.begin();
     try {
-        bool r = lex::tokenize(it, f_contents.begin(), tokens);
+        bool r = lex::tokenize(it, f_contents.end(), tokens);
 
         if(r) {
             std::cout << "SUCCESS!" << "\n";
+            std::cout << tokens.line << "\n";
         } else {
             std::cerr << "FAILURE." << "\n";
 
