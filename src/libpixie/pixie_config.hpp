@@ -1,0 +1,3 @@
+#define PIXIE_VERSION_MAJOR 0
+#define PIXIE_VERSION_MINOR 1
+

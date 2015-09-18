@@ -28,25 +28,25 @@ set (COMP_FLAGS "-Werror -Wall -std=c++11")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${COMP_FLAGS}")
 
 configure_file (
-    libpixie/pixie_config.in.hpp
-    libpixie/pixie_config.hpp
+    src/libpixie/pixie_config.in.hpp
+    src/libpixie/pixie_config.hpp
     )
 
-include_directories(libpixie ${Boost_INCLUDE_DIRS})
+include_directories(src/libpixie ${Boost_INCLUDE_DIRS})
 
-message("PROJECT_SOURCE_DIR points to " ${PROJECT_SOURCE_DIR})
+#message("PROJECT_SOURCE_DIR points to " ${PROJECT_SOURCE_DIR})
 
 add_library(pixie-core
     SHARED
-    libpixie/ast.cpp
+    src/libpixie/ast.cpp
 )
 
 add_executable(pixc 
-    pixc/pixc.cpp
+    src/pixc/pixc.cpp
 )
 
 add_executable(pixie 
-    pixie/pixie.cpp
+    src/pixie/pixie.cpp
 )
 
 target_link_libraries(pixc pixie-core ${Boost-LIBRARIES})
