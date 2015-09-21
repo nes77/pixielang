@@ -1,0 +1,31 @@
+(import pixie.lang)
+
+(defn hello_world (str)
+    (print str))
+
+(hello_world "Hello, World!")
+
+(defn kargs [a b &key (c 10) (d 100)]
+    (print d))
+
+(def x 5)
+
+(kargs 0 1 :d 100)
+
+(defclass HelloWorld 
+    :extends (Object)
+    :doc "Example class!"
+    (defn --init-- (self x)
+        (setv self.x x)
+        None)
+        
+    (defn --str-- (self)
+        (self.x)))
+        
+(def example_h (HelloWorld) 2)
+
+(def example_typevar (type example_h))
+
+(print (str example_h))
+
+(assert (= (type example_h) HelloWorld))
