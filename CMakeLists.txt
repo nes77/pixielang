@@ -17,7 +17,7 @@ if (APPLE OR WIN32)
     set(Boost_USE_STATIC_LIBS TRUE)
 endif()
 
-find_package(Boost 1.55 REQUIRED COMPONENTS program_options filesystem regex)
+find_package(Boost 1.48 REQUIRED COMPONENTS program_options filesystem regex)
 
 # version number
 set (PIXIE_VERSION_MAJOR 0)
