@@ -22,7 +22,7 @@ before_script:
   - cd ..
 compiler:
   - gcc
-script: cmake CMakeLists.txt; make; ctest --timeout 30
+script: cmake CMakeLists.txt && make && ctest --timeout 30
 notifications:
   email:
     recipients:
