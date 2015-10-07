@@ -5,7 +5,7 @@
 #include <boost/program_options.hpp>
 #include <boost/foreach.hpp>
 #include "pixie_config.hpp"
-#include "lexer.hpp"
+#include "parser.hpp"
 #include "common.hpp"
 
 namespace po = boost::program_options;
@@ -20,22 +20,15 @@ int main(int argc, const char **argv) {
             ("help", "Print this message")
             ("version,v", "Print the version number")
             ("ast", "Print the AST during compile")
+            ("FILE", po::value<vector<string> >()->required(), "Pixie source files")
             ;
-    
-    po::options_description hidden("Hidden");
-    hidden.add_options()
-            ("FILE", po::value<vector<string> >(), "Pixie source files")
-            ;
-    
-    po::options_description cmd("");
-    cmd.add(desc).add(hidden);
     
     po::positional_options_description pdesc;
     pdesc.add("FILE", -1);
     
     po::variables_map vm;
     po::store(po::command_line_parser(argc, argv)
-            .options(cmd)
+            .options(desc)
             .positional(pdesc)
             .run(), vm);
     po::notify(vm);
@@ -66,14 +59,14 @@ int main(int argc, const char **argv) {
     
     cout << "Source files:\n";
     
-    vector<string> files; /*= vm["FILE"].as<vector<string> >();*/
-    files.push_back(string("/home/nsamson/Projects/pixie/doc/grammar_test1.px"));
+    vector<string> files = vm["FILE"].as<vector<string> >();
     
     BOOST_FOREACH(string file, files) {
         
         cout << "    " << file << "\n";
         
         pixie::compile::_test_tokenizer(file);
+        pixie::compile::_test_parser(file);
         
     }
 

@@ -40,6 +40,7 @@ add_library(pixie-core
     SHARED
     src/libpixie/ast.cpp
     src/libpixie/lexer.cpp
+    src/libpixie/parser.cpp
 )
 
 add_executable(pixc 

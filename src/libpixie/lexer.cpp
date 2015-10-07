@@ -2,7 +2,10 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <boost/bind/placeholders.hpp>
 #include <iostream>
+
+namespace lex = boost::spirit::lex;
 
 void pixie::compile::_test_tokenizer(std::string filename) {
 
@@ -26,9 +29,12 @@ void pixie::compile::_test_tokenizer(std::string filename) {
     f_contents = ss.str();
     
     pixie::compile::pixie_lexer tokens;
+    pixie::compile::PixieLexerPrinter pprinter(tokens.id_map());
+    
     std::string::iterator it = f_contents.begin();
     try {
-        bool r = lex::tokenize(it, f_contents.end(), tokens);
+        bool r = lex::tokenize(it, f_contents.end(), tokens,
+                pprinter);
 
         if(r) {
             std::cout << "SUCCESS!" << "\n";
@@ -38,14 +44,14 @@ void pixie::compile::_test_tokenizer(std::string filename) {
 
             std::string rest(it, f_contents.end());
 
-            std::cerr << "Parsing failed\nstopped at: \n"
+            std::cerr << "Lexing failed\nstopped at: \n"
                     << rest << "\n";
         }
     }
     catch (...) {
         std::string rest(it, f_contents.end());
 
-        std::cerr << "Parsing failed\nstopped at: \n"
+        std::cerr << "Lexing failed\nstopped at: \n"
                 << rest << "\n";
         throw;
     }

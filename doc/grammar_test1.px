@@ -1,13 +1,13 @@
 import pixie.lang;
 
-def hello_world(str) -> print(str);
+class HelloWorld {
+  def foo [bar] -> print(bar);
+}
 
-hello_world("Hello, World!");
+x = HelloWorld();
 
-def kargs(a, b, c, d) -> print(d);
+x.foo('Hello, World! I\'m pixie!');
 
-x = 5;
+y = 1 + 2 / 4 - (3/4*(7**2));
 
-1 + 2 + 3 - 4 * 5;
-
-print(x[4:5]);
+y /= 3.0;

@@ -1,3 +1,7 @@
+#ifndef PIXIE_CONFIG_HPP
+#define PIXIE_CONFIG_HPP
+
 #define PIXIE_VERSION_MAJOR 0
 #define PIXIE_VERSION_MINOR 1
 
+#endif

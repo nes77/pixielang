@@ -119,7 +119,7 @@ func_def
     ;
 
 parameter_list
-    : '(' func_def_args? ')'
+    : '[>' func_def_args? '<]'
     ;
 
 func_def_args
@@ -217,6 +217,8 @@ LBrace : '{';
 RBrace : '}';
 LBracket : '[';
 RBracket : ']';
+LBarrow : '[>';
+RBarrow : '<]';
 
 Def : 'def';
 Class : 'class';
