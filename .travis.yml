@@ -8,9 +8,21 @@ before_script:
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 90
   - sudo apt-get install libstdc++-4.8-dev
   - sudo apt-get install libboost-dev libboost-program-options-dev libboost-filesystem-dev libboost-regex-dev
+  - sudo apt-get remove cmake
+  # install cmake
+  - CMAKE_VERSION="3.0.0"
+  - wget "http://www.cmake.org/files/v3.0/cmake-${CMAKE_VERSION}.tar.gz"
+  - openssl sha1 "cmake-${CMAKE_VERSION}.tar.gz"
+  - tar xf "cmake-${CMAKE_VERSION}.tar.gz"
+  - cd "cmake-${CMAKE_VERSION}"
+  - ./bootstrap --prefix=~
+  - make
+  - make install
+  - export PATH="~/bin:${PATH}"
+  - cd ..
 compiler:
   - gcc
-script: cmake && ctest --timeout 30
+script: cmake CMakeLists.txt; make; ctest --timeout 30
 notifications:
   email:
     recipients:
