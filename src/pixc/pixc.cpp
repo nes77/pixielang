@@ -5,7 +5,7 @@
 #include <boost/program_options.hpp>
 #include <boost/foreach.hpp>
 #include "pixie_config.hpp"
-#include "parser.hpp"
+#include "lexer.hpp"
 #include "common.hpp"
 
 namespace po = boost::program_options;
@@ -31,12 +31,13 @@ int main(int argc, const char **argv) {
             .options(desc)
             .positional(pdesc)
             .run(), vm);
-    po::notify(vm);
-    
+
     if (vm.count("help")) {
         cout << desc << "\n";
         return 0;
     }
+    
+    po::notify(vm);
     
     if (vm.count("version")) {
         cout << "Pixie Compiler version " 
@@ -66,8 +67,8 @@ int main(int argc, const char **argv) {
         cout << "    " << file << "\n";
         
         pixie::compile::_test_tokenizer(file);
-        pixie::compile::_test_parser(file);
         
+        cout << endl;
     }
 
     return 0;

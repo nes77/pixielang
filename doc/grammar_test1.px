@@ -1,7 +1,7 @@
 import pixie.lang;
 
 class HelloWorld {
-  def foo [bar] -> print(bar);
+  def foo(bar) -> print(bar);
 }
 
 x = HelloWorld();
@@ -10,4 +10,12 @@ x.foo('Hello, World! I\'m pixie!');
 
 y = 1 + 2 / 4 - (3/4*(7**2));
 
+lambda = (\ x -> print(x ^ 1));
+
 y /= 3.0;
+
+if (tutorial) {
+  print("This is a double-quoted string literal. You can tell because of the \" at the beginning and end.");
+}
+
+z = 0 if True else None;
