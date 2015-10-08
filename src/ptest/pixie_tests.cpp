@@ -17,16 +17,6 @@
 
 using namespace boost::unit_test_framework;
 
-//test_suite*
-//init_unit_test_suite( int, char* [] ) {
-//    test_suite* test= BOOST_TEST_SUITE( "Unit test example 1" );
-//
-//    // this example will pass cause we know ahead of time number of expected failures
-//    test->add( BOOST_TEST_CASE( &free_test_function ), 1 /* expected one error */ );
-//
-//    return test;
-//}
-
 BOOST_AUTO_TEST_SUITE(lexer_tests)
         
 BOOST_AUTO_TEST_CASE(token_test_1) {

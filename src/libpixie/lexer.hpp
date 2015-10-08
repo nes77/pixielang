@@ -12,6 +12,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <deque>
 #include <iostream>
 #include <exception>
 
@@ -34,7 +35,6 @@ PIXIE_TOKEN(If, R"(if)")\
 PIXIE_TOKEN(Else, R"(else)")\
 PIXIE_TOKEN(Elif, R"(elif)")\
 PIXIE_TOKEN(Is, R"(is)")\
-PIXIE_TOKEN(InstanceOf, R"(is a)")\
 PIXIE_TOKEN(In, R"(in)")\
 PIXIE_TOKEN(LessThan, R"(<)")\
 PIXIE_TOKEN(LessEquals, R"(<=)")\
@@ -90,7 +90,7 @@ PIXIE_TOKEN(True, R"(True)")\
 PIXIE_TOKEN(False, R"(False)")\
 PIXIE_TOKEN(None, R"(None)")\
 PIXIE_TOKEN(Del, R"(del)")\
-PIXIE_TOKEN(Identifier, R"([a-zA-Z][a-zA-Z0-9_]*)")\
+PIXIE_TOKEN(Identifier, R"([a-zA-Z_][a-zA-Z0-9_]*)")\
 PIXIE_TOKEN(Space, R"([ \r\t])")\
 PIXIE_TOKEN(Comment, R"(#[^\r\n]*)")\
 PIXIE_TOKEN(EOL, R"(\n)")
@@ -121,13 +121,13 @@ namespace pixie {
             std::string to_string();
         };
         
-        typedef std::vector<PixieToken> token_vec;
+        typedef std::deque<PixieToken> token_vec;
         
         class PixieTokenizer {
             
             size_t line;
             size_t column;
-            std::vector<PixieToken> tokens;
+            std::deque<PixieToken> tokens;
             
         public:
             PixieTokenizer(std::string);
