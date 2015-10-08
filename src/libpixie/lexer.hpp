@@ -153,4 +153,6 @@ namespace pixie {
     }
 }
 
+inline std::ostream& operator<<(std::ostream&, pixie::compile::PixieTokenType);
+
 #endif

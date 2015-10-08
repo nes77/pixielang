@@ -17,7 +17,9 @@ if (APPLE OR WIN32)
     set(Boost_USE_STATIC_LIBS TRUE)
 endif()
 
-find_package(Boost 1.55 REQUIRED COMPONENTS program_options filesystem regex)
+find_package(Boost 1.55 REQUIRED COMPONENTS program_options filesystem regex
+    unit_test_framework
+)
 
 # version number
 set (PIXIE_VERSION_MAJOR 0)
@@ -51,14 +53,19 @@ add_executable(pixie
     src/pixie/pixie.cpp
 )
 
+add_executable(pixie_tests
+    src/ptest/pixie_tests.cpp
+)
+
 #message("Boost libs: " ${Boost_LIBRARIES})
 
 target_link_libraries(pixie-core ${Boost_LIBRARIES})
 target_link_libraries(pixc pixie-core ${Boost_LIBRARIES})
 target_link_libraries(pixie pixie-core ${Boost_LIBRARIES})
+target_link_libraries(pixie_tests pixie-core ${Boost_LIBRARIES})
 
 enable_testing()
 
 add_test (pixc_simple_grammar pixc doc/grammar_test1.px)
 add_test (pixc_huge_file pixc doc/grammar_test2.px)
-
+add_test (unit_tests pixie_tests)

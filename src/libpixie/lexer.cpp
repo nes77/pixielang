@@ -185,3 +185,8 @@ PixieTokenizer::PixieTokenizer(std::string code) : line(1), column(1) {
     }
 
 }
+
+std::ostream& operator<<(std::ostream& os, pixie::compile::PixieTokenType type) {
+    os << pixie::compile::stringify(type);
+    return os;
+}
