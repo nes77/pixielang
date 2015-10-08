@@ -67,11 +67,11 @@ BOOST_AUTO_TEST_CASE(token_test_2_literals) {
             R"('This is a single-quoted string! With a \' at both ends!')"));
     
     tokenizer = pixie::compile::PixieTokenizer(
-            R"(5.0E10)");
+            R"(5.000000000000005)");
     BOOST_CHECK(tokenizer.begin()->type == pixie::compile::PixieTokenType::Float);
     BOOST_CHECK(
             tokenizer.begin()->value == std::string(
-            R"(5.0E10)"));
+            R"(5.000000000000005)"));
     
     tokenizer = pixie::compile::PixieTokenizer(
             R"(200)");
