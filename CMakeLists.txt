@@ -38,10 +38,10 @@ include_directories(src/libpixie ${Boost_INCLUDE_DIRS})
 
 add_library(pixie-core
     SHARED
-    src/libpixie/ast.cpp
+        src/libpixie/ast.cpp
     src/libpixie/lexer.cpp
     #src/libpixie/parser.cpp
-)
+        src/libpixie/runtime/bytecode.hpp src/libpixie/runtime/classes.hpp src/libpixie/runtime/runtime.cpp src/libpixie/runtime.hpp)
 
 add_executable(pixc 
     src/pixc/pixc.cpp

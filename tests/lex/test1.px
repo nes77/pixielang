@@ -1,0 +1,57 @@
+import math;
+import sys;
+
+// format declaration is like
+// def format(obj...)
+
+class Point(x, y) {
+
+    assert x.instanceof(Numeric);
+    assert y.instanceof(Numeric);
+    self.x = x;
+    self.y = y;
+}
+
+class Point3D(x, y, z) {
+    super(self, x, y); // alternative self.super(x, y)
+    assert z.instanceof(Numeric);
+    self.z = z;
+}
+
+def str(p as Point) {
+    return "{},{}".format(p.x, p.y);
+}
+
+def str(p as Point3D) {
+    return str(p as Point).concat(",{}".format(p.z));
+}
+
+def dist(a as Point, b as Point) {
+    xd = a.x - b.x;
+    yd = a.y - b.y;
+    return math.sqrt(xd ** 2 + yd ** 2)
+}
+
+def dist(a as Point3D, b as Point3D) {
+
+    return math.sqrt(dist(a as Point, b as Point) ** 2 + (a.z - b.z) ** 2);
+
+}
+
+def main() {
+    points = 0.range(100).map((\ x -> Point3D(x, x, x))).toList()
+
+    first = points.get(0)
+
+    for (point : points) {
+        "Distance between {} and {} is {}".format(first, point, dist(first, point)).print();
+    }
+
+    sys.exit(0);
+}
+
+if (sys.inMainModule()) {
+    main();
+}
+
+hides main;
