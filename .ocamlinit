@@ -1,0 +1,9 @@
+#directory "_build"
+#require "num"
+#require "menhirLib"
+
+#load "parser.cmo"
+#load "lexer.cmo"
+#load "pixc.cmo"
+
+open Pixc
