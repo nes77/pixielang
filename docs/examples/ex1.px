@@ -1,0 +1,51 @@
+import time
+import long_module
+import several, modules, at, once
+
+hello_world = function () -> call println("Hello, world")
+
+type SimpleType(x) -> {}
+
+type Tree() -> {}
+
+type Leaf() : Tree() -> {}
+
+type Node(value, left=Leaf(), right=Leaf()) : Tree() -> {
+    self.value := value
+    self.left := Leaf()
+    self.right := Leaf()
+}
+
+func (t : Tree) insert(v) -> {
+    switch (typeof(t)) {
+    case (Node) {
+            if (t.value < v) {
+                return Node(t.value, t.left, t.right.insert(v))
+            } else if (t.value == v) {
+                return Node(v, t.left, t.right)
+            } else {
+                return Node(t.value, t.left.insert(v), t.right)
+            }
+        }
+
+    case (Leaf) {
+            return Node(v)
+        }
+
+    default { raise TypeError("Expected a Node or a Leaf") }
+    }
+}
+
+type Animal() -> {}
+
+func (a : Animal) make_noise() -> {
+    call println("Yep, I'm an animal.")
+}
+
+func pluser(x : Int) -> {
+    return function (y : Int) -> return x + y
+}
+
+func use_module_function() -> {
+    return time.now()
+}

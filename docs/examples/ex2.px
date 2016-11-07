@@ -1,0 +1,13 @@
+type Animal() -> {}
+
+func (a : Animal) make_noise() -> {
+    call println("Yep, I'm an animal.")
+}
+
+func pluser(x : Int) -> {
+    return function (y : Int) -> return x + y
+}
+
+func use_module_function() -> {
+    return time.now()
+}
